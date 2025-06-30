@@ -1,0 +1,2071 @@
+/* Bookstore Management System - Enhanced Theme */
+:root {
+    /* Updated color palette with deeper purple tones */
+    --bs-body-bg: #f8f9fa;
+    --bs-body-color: #1a202c;
+    --bs-primary: #6a1b9a;
+    --bs-primary-rgb: 106, 27, 154;
+    --bs-primary-text-emphasis: #311b92;
+    --bs-primary-bg-subtle: #f3e5f5;
+    --bs-primary-border-subtle: #d1c4e9;
+    --bs-placeholder-color: #6c757d;
+    
+    --bs-secondary: #455a64;
+    --bs-secondary-rgb: 84, 110, 122;
+    --bs-secondary-text-emphasis: #1c313a;
+    --bs-secondary-bg-subtle: #eceff1;
+    --bs-secondary-border-subtle: #cfd8dc;
+    
+    --bs-info: #0288d1;
+    --bs-info-rgb: 2, 136, 209;
+    
+    --bs-success: #388e3c;
+    --bs-success-rgb: 56, 142, 60;
+    
+    --bs-warning: #f57c00;
+    --bs-warning-rgb: 245, 124, 0;
+    
+    --bs-danger: #d32f2f;
+    --bs-danger-rgb: 211, 47, 47;
+    
+    /* New variables for enhanced styling */
+    --bs-card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --bs-card-hover-shadow: 0 10px 15px rgba(106, 27, 154, 0.15);
+    --bs-text-muted: #424242;
+}
+
+/* Base typography improvements */
+body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);
+    padding-bottom: 140px;
+}
+
+/* Placeholder styling */
+::placeholder {
+    color: #212529;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: var(--bs-placeholder-color);
+}
+
+::-ms-input-placeholder {
+    color: var(--bs-placeholder-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: var(--bs-primary-text-emphasis);
+}
+
+h3.mb-0 {
+    color: #f8f9fa;
+}
+
+/* Enhanced book cards with subtle animations */
+.book-card {
+    height: 100%;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: white;
+    border: 1px solid var(--bs-primary-border-subtle);
+    box-shadow: var(--bs-card-shadow);
+    position: relative;
+}
+
+.book-card:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--bs-primary), var(--bs-primary-bg-subtle));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--bs-card-hover-shadow);
+    border-color: var(--bs-primary);
+}
+
+.book-card:hover:before {
+    opacity: 1;
+}
+
+.book-card .card-img-top {
+    height: 280px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.book-card:hover .card-img-top {
+    transform: scale(1.03);
+}
+
+.book-card .card-body {
+    padding: 1.5rem;
+}
+
+.book-card .card-title {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--bs-primary-text-emphasis);
+}
+
+.book-card .card-text.text-muted {
+    color: var(--bs-text-muted) !important;
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.price {
+    font-weight: 700;
+    color: var(--bs-primary);
+    font-size: 1.25rem;
+    margin-top: 0.5rem;
+}
+
+/* Book details page enhancements */
+.book-details-container {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: var(--bs-card-shadow);
+    padding: 2rem;
+}
+
+.book-details-img {
+    max-height: 450px;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--bs-primary-border-subtle);
+}
+
+.book-details-info {
+    padding-left: 2rem;
+}
+
+.book-details-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--bs-primary-text-emphasis);
+}
+
+.book-details-author {
+    font-size: 1.2rem;
+    color: var(--bs-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.book-details-description {
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.book-details-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--bs-primary);
+}
+
+/* Cart page improvements */
+.cart-container {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: var(--bs-card-shadow);
+    padding: 2rem;
+}
+
+.cart-item {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--bs-primary-border-subtle);
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item-img {
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item-title {
+    font-weight: 600;
+    color: var(--bs-primary-text-emphasis);
+}
+
+.cart-item-author {
+    color: var(--bs-text-muted);
+    font-size: 0.95rem;
+}
+
+.cart-summary {
+    background-color: var(--bs-primary-bg-subtle);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+/* Admin dashboard cards */
+.dashboard-card {
+    border-left: 4px solid var(--bs-primary);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background-color: white;
+    box-shadow: var(--bs-card-shadow);
+    padding: 1.5rem;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--bs-card-hover-shadow);
+}
+
+.dashboard-icon {
+    font-size: 2.5rem;
+    color: var(--bs-primary);
+    margin-bottom: 1rem;
+}
+
+.dashboard-card-title {
+    font-size: 1rem;
+    color: var(--bs-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.dashboard-card-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--bs-primary-text-emphasis);
+}
+
+/* Order status badges */
+.badge {
+    font-weight: 600;
+    padding: 0.5em 0.8em;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Order date styling */
+.order-date {
+    color: var(--bs-secondary);
+    font-weight: 500;
+}
+
+.badge-pending {
+    background-color: var(--bs-warning);
+}
+
+.badge-processing {
+    background-color: var(--bs-info);
+}
+
+.badge-shipped {
+    background-color: var(--bs-primary);
+}
+
+.badge-delivered {
+    background-color: var(--bs-success);
+}
+
+.badge-cancelled {
+    background-color: var(--bs-danger);
+}
+
+/* Navbar enhancements */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 0.75rem 1rem;
+    background-color: var(--bs-primary) !important;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    position: relative;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus {
+    color: #ffffff;
+}
+
+.navbar-dark .navbar-nav .nav-link:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    right: 1rem;
+    height: 2px;
+    background-color: white;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover:after,
+.navbar-dark .navbar-nav .nav-link:focus:after {
+    transform: scaleX(1);
+}
+
+/* Dropdown menu refinements */
+.dropdown-menu {
+    background-color: white;
+    border: 1px solid var(--bs-primary-border-subtle);
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+}
+
+.dropdown-item {
+    color: var(--bs-body-color);
+    transition: all 0.2s ease;
+    padding: 0.5rem 1.25rem;
+    font-weight: 500;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: var(--bs-primary-bg-subtle);
+    color: var(--bs-primary-text-emphasis);
+}
+
+/* Button enhancements */
+.btn {
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 0.5rem 1.25rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+    box-shadow: 0 2px 5px rgba(106, 27, 154, 0.2);
+}
+
+.btn-primary:hover {
+    background-color: #4a148c;
+    border-color: #4a148c;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(106, 27, 154, 0.3);
+}
+
+.btn-outline-primary {
+    color: var(--bs-primary);
+    border-color: var(--bs-primary);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+}
+
+/* Form control styling */
+.form-control {
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--bs-primary-border-subtle);
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.25rem rgba(106, 27, 154, 0.15);
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--bs-secondary);
+    margin-bottom: 0.5rem;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bs-secondary-bg-subtle);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bs-primary);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4a148c;
+}
+
+/* Footer styling */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--bs-primary);
+    color: white;
+    text-align: center;
+    padding: 1.5rem 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.footer-links a {
+    color: white;
+    margin-left: 1.5rem;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.footer-links a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+/* Book category chips */
+.book-category {
+    display: inline-block;
+    background: linear-gradient(135deg, #f5e9c8, #e8d8a8);
+    color: #6d4c1b;
+    font-weight: 600;
+    padding: 0.25em 0.8em;
+    border-radius: 1em;
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.03em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.book-category:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Login page enhancements */
+.login-page {
+    min-height: 80vh;
+    background:  
+                url('walledited.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem;
+}
+
+.login-page .card {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-page .card-header {
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.login-page .card-body {
+    padding: 2rem;
+}
+
+.login-page .form-control {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-page .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    border: none;
+    box-shadow: 0 4px 8px rgba(106, 27, 154, 0.3);
+}
+
+.login-page .btn-primary:hover {
+    background: linear-gradient(135deg, #4a148c, #7b1fa2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(106, 27, 154, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .book-details-info {
+        padding-left: 0;
+        margin-top: 2rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        margin-top: 1rem;
+    }
+    
+    .footer-links a {
+        margin: 0 0.75rem;
+    }
+}
+
+/* Animation for page transitions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.main-content {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Book category chips */
+.book-category {
+    display: inline-block;
+    background: linear-gradient(135deg, #f5e9c8, #e8d8a8);
+    color: #6d4c1b;
+    font-weight: 600;
+    padding: 0.25em 0.8em;
+    border-radius: 1em;
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.03em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.book-category:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Login page enhancements */
+.login-page {
+    min-height: 80vh;
+    background:  
+                url('walledited.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem;
+}
+
+.login-page .card {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-page .card-header {
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.login-page .card-body {
+    padding: 2rem;
+}
+
+.login-page .form-control {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-page .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    border: none;
+    box-shadow: 0 4px 8px rgba(106, 27, 154, 0.3);
+}
+
+.login-page .btn-primary:hover {
+    background: linear-gradient(135deg, #4a148c, #7b1fa2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(106, 27, 154, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .book-details-info {
+        padding-left: 0;
+        margin-top: 2rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        margin-top: 1rem;
+    }
+    
+    .footer-links a {
+        margin: 0 0.75rem;
+    }
+}
+
+/* Animation for page transitions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.main-content {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Book category chips */
+.book-category {
+    display: inline-block;
+    background: linear-gradient(135deg, #f5e9c8, #e8d8a8);
+    color: #6d4c1b;
+    font-weight: 600;
+    padding: 0.25em 0.8em;
+    border-radius: 1em;
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.03em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.book-category:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Login page enhancements */
+.login-page {
+    min-height: 80vh;
+    background:  
+                url('walledited.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem;
+}
+
+.login-page .card {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-page .card-header {
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.login-page .card-body {
+    padding: 2rem;
+}
+
+.login-page .form-control {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-page .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    border: none;
+    box-shadow: 0 4px 8px rgba(106, 27, 154, 0.3);
+}
+
+.login-page .btn-primary:hover {
+    background: linear-gradient(135deg, #4a148c, #7b1fa2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(106, 27, 154, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .book-details-info {
+        padding-left: 0;
+        margin-top: 2rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        margin-top: 1rem;
+    }
+    
+    .footer-links a {
+        margin: 0 0.75rem;
+    }
+}
+
+/* Animation for page transitions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.main-content {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Book category chips */
+.book-category {
+    display: inline-block;
+    background: linear-gradient(135deg, #f5e9c8, #e8d8a8);
+    color: #6d4c1b;
+    font-weight: 600;
+    padding: 0.25em 0.8em;
+    border-radius: 1em;
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.03em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.book-category:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Login page enhancements */
+.login-page {
+    min-height: 80vh;
+    background:  
+                url('walledited.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem;
+}
+
+.login-page .card {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-page .card-header {
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.login-page .card-body {
+    padding: 2rem;
+}
+
+.login-page .form-control {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-page .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    border: none;
+    box-shadow: 0 4px 8px rgba(106, 27, 154, 0.3);
+}
+
+.login-page .btn-primary:hover {
+    background: linear-gradient(135deg, #4a148c, #7b1fa2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(106, 27, 154, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .book-details-info {
+        padding-left: 0;
+        margin-top: 2rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        margin-top: 1rem;
+    }
+    
+    .footer-links a {
+        margin: 0 0.75rem;
+    }
+}
+
+/* Animation for page transitions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.main-content {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Book category chips */
+.book-category {
+    display: inline-block;
+    background: linear-gradient(135deg, #f5e9c8, #e8d8a8);
+    color: #6d4c1b;
+    font-weight: 600;
+    padding: 0.25em 0.8em;
+    border-radius: 1em;
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.03em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.book-category:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Login page enhancements */
+.login-page {
+    min-height: 80vh;
+    background:  
+                url('walledited.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem;
+}
+
+.login-page .card {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-page .card-header {
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.login-page .card-body {
+    padding: 2rem;
+}
+
+.login-page .form-control {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-page .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    border: none;
+    box-shadow: 0 4px 8px rgba(106, 27, 154, 0.3);
+}
+
+.login-page .btn-primary:hover {
+    background: linear-gradient(135deg, #4a148c, #7b1fa2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(106, 27, 154, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .book-details-info {
+        padding-left: 0;
+        margin-top: 2rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        margin-top: 1rem;
+    }
+    
+    .footer-links a {
+        margin: 0 0.75rem;
+    }
+}
+
+/* Animation for page transitions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.main-content {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Book category chips */
+.book-category {
+    display: inline-block;
+    background: linear-gradient(135deg, #f5e9c8, #e8d8a8);
+    color: #6d4c1b;
+    font-weight: 600;
+    padding: 0.25em 0.8em;
+    border-radius: 1em;
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.03em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.book-category:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Login page enhancements */
+.login-page {
+    min-height: 80vh;
+    background:  
+                url('walledited.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem;
+}
+
+.login-page .card {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-page .card-header {
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.login-page .card-body {
+    padding: 2rem;
+}
+
+.login-page .form-control {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-page .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    border: none;
+    box-shadow: 0 4px 8px rgba(106, 27, 154, 0.3);
+}
+
+.login-page .btn-primary:hover {
+    background: linear-gradient(135deg, #4a148c, #7b1fa2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(106, 27, 154, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .book-details-info {
+        padding-left: 0;
+        margin-top: 2rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        margin-top: 1rem;
+    }
+    
+    .footer-links a {
+        margin: 0 0.75rem;
+    }
+}
+
+/* Animation for page transitions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.main-content {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Book category chips */
+.book-category {
+    display: inline-block;
+    background: linear-gradient(135deg, #f5e9c8, #e8d8a8);
+    color: #6d4c1b;
+    font-weight: 600;
+    padding: 0.25em 0.8em;
+    border-radius: 1em;
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.03em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.book-category:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Login page enhancements */
+.login-page {
+    min-height: 80vh;
+    background:  
+                url('walledited.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem;
+}
+
+.login-page .card {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-page .card-header {
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.login-page .card-body {
+    padding: 2rem;
+}
+
+.login-page .form-control {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-page .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    border: none;
+    box-shadow: 0 4px 8px rgba(106, 27, 154, 0.3);
+}
+
+.login-page .btn-primary:hover {
+    background: linear-gradient(135deg, #4a148c, #7b1fa2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(106, 27, 154, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .book-details-info {
+        padding-left: 0;
+        margin-top: 2rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        margin-top: 1rem;
+    }
+    
+    .footer-links a {
+        margin: 0 0.75rem;
+    }
+}
+
+/* Animation for page transitions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.main-content {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Book category chips */
+.book-category {
+    display: inline-block;
+    background: linear-gradient(135deg, #f5e9c8, #e8d8a8);
+    color: #6d4c1b;
+    font-weight: 600;
+    padding: 0.25em 0.8em;
+    border-radius: 1em;
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.03em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.book-category:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Login page enhancements */
+.login-page {
+    min-height: 80vh;
+    background:  
+                url('walledited.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem;
+}
+
+.login-page .card {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-page .card-header {
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.login-page .card-body {
+    padding: 2rem;
+}
+
+.login-page .form-control {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-page .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    border: none;
+    box-shadow: 0 4px 8px rgba(106, 27, 154, 0.3);
+}
+
+.login-page .btn-primary:hover {
+    background: linear-gradient(135deg, #4a148c, #7b1fa2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(106, 27, 154, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .book-details-info {
+        padding-left: 0;
+        margin-top: 2rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        margin-top: 1rem;
+    }
+    
+    .footer-links a {
+        margin: 0 0.75rem;
+    }
+}
+
+/* Animation for page transitions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.main-content {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Book category chips */
+.book-category {
+    display: inline-block;
+    background: linear-gradient(135deg, #f5e9c8, #e8d8a8);
+    color: #6d4c1b;
+    font-weight: 600;
+    padding: 0.25em 0.8em;
+    border-radius: 1em;
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.03em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.book-category:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Login page enhancements */
+.login-page {
+    min-height: 80vh;
+    background:  
+                url('walledited.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem;
+}
+
+.login-page .card {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-page .card-header {
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.login-page .card-body {
+    padding: 2rem;
+}
+
+.login-page .form-control {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-page .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    border: none;
+    box-shadow: 0 4px 8px rgba(106, 27, 154, 0.3);
+}
+
+.login-page .btn-primary:hover {
+    background: linear-gradient(135deg, #4a148c, #7b1fa2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(106, 27, 154, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .book-details-info {
+        padding-left: 0;
+        margin-top: 2rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        margin-top: 1rem;
+    }
+    
+    .footer-links a {
+        margin: 0 0.75rem;
+    }
+}
+
+/* Animation for page transitions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.main-content {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Book category chips */
+.book-category {
+    display: inline-block;
+    background: linear-gradient(135deg, #f5e9c8, #e8d8a8);
+    color: #6d4c1b;
+    font-weight: 600;
+    padding: 0.25em 0.8em;
+    border-radius: 1em;
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.03em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.book-category:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Login page enhancements */
+.login-page {
+    min-height: 80vh;
+    background:  
+                url('walledited.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem;
+}
+
+.login-page .card {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-page .card-header {
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.login-page .card-body {
+    padding: 2rem;
+}
+
+.login-page .form-control {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-page .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    border: none;
+    box-shadow: 0 4px 8px rgba(106, 27, 154, 0.3);
+}
+
+.login-page .btn-primary:hover {
+    background: linear-gradient(135deg, #4a148c, #7b1fa2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(106, 27, 154, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .book-details-info {
+        padding-left: 0;
+        margin-top: 2rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        margin-top: 1rem;
+    }
+    
+    .footer-links a {
+        margin: 0 0.75rem;
+    }
+}
+
+/* Animation for page transitions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.main-content {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Book category chips */
+.book-category {
+    display: inline-block;
+    background: linear-gradient(135deg, #f5e9c8, #e8d8a8);
+    color: #6d4c1b;
+    font-weight: 600;
+    padding: 0.25em 0.8em;
+    border-radius: 1em;
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.03em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.book-category:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Login page enhancements */
+.login-page {
+    min-height: 80vh;
+    background:  
+                url('walledited.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem;
+}
+
+.login-page .card {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-page .card-header {
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.login-page .card-body {
+    padding: 2rem;
+}
+
+.login-page .form-control {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-page .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    border: none;
+    box-shadow: 0 4px 8px rgba(106, 27, 154, 0.3);
+}
+
+.login-page .btn-primary:hover {
+    background: linear-gradient(135deg, #4a148c, #7b1fa2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(106, 27, 154, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .book-details-info {
+        padding-left: 0;
+        margin-top: 2rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        margin-top: 1rem;
+    }
+    
+    .footer-links a {
+        margin: 0 0.75rem;
+    }
+}
+
+/* Animation for page transitions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.main-content {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Book category chips */
+.book-category {
+    display: inline-block;
+    background: linear-gradient(135deg, #f5e9c8, #e8d8a8);
+    color: #6d4c1b;
+    font-weight: 600;
+    padding: 0.25em 0.8em;
+    border-radius: 1em;
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.03em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.book-category:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Login page enhancements */
+.login-page {
+    min-height: 80vh;
+    background:  
+                url('walledited.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem;
+}
+
+.login-page .card {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-page .card-header {
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.login-page .card-body {
+    padding: 2rem;
+}
+
+.login-page .form-control {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-page .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    border: none;
+    box-shadow: 0 4px 8px rgba(106, 27, 154, 0.3);
+}
+
+.login-page .btn-primary:hover {
+    background: linear-gradient(135deg, #4a148c, #7b1fa2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(106, 27, 154, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .book-details-info {
+        padding-left: 0;
+        margin-top: 2rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        margin-top: 1rem;
+    }
+    
+    .footer-links a {
+        margin: 0 0.75rem;
+    }
+}
+
+/* Animation for page transitions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.main-content {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Book category chips */
+.book-category {
+    display: inline-block;
+    background: linear-gradient(135deg, #f5e9c8, #e8d8a8);
+    color: #6d4c1b;
+    font-weight: 600;
+    padding: 0.25em 0.8em;
+    border-radius: 1em;
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.03em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.book-category:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Login page enhancements */
+.login-page {
+    min-height: 80vh;
+    background:  
+                url('walledited.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem;
+}
+
+.login-page .card {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-page .card-header {
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.login-page .card-body {
+    padding: 2rem;
+}
+
+.login-page .form-control {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-page .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    border: none;
+    box-shadow: 0 4px 8px rgba(106, 27, 154, 0.3);
+}
+
+.login-page .btn-primary:hover {
+    background: linear-gradient(135deg, #4a148c, #7b1fa2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(106, 27, 154, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .book-details-info {
+        padding-left: 0;
+        margin-top: 2rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        margin-top: 1rem;
+    }
+    
+    .footer-links a {
+        margin: 0 0.75rem;
+    }
+}
+
+/* Animation for page transitions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.main-content {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Book category chips */
+.book-category {
+    display: inline-block;
+    background: linear-gradient(135deg, #f5e9c8, #e8d8a8);
+    color: #6d4c1b;
+    font-weight: 600;
+    padding: 0.25em 0.8em;
+    border-radius: 1em;
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.03em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.book-category:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Login page enhancements */
+.login-page {
+    min-height: 80vh;
+    background:  
+                url('walledited.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem;
+}
+
+.login-page .card {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-page .card-header {
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.login-page .card-body {
+    padding: 2rem;
+}
+
+.login-page .form-control {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-page .btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, var(--bs-primary), #9c27b0);
+    border: none;
+    box-shadow: 0 4px 8px rgba(106, 27, 154, 0.3);
+}
+
+.login-page .btn-primary:hover {
+    background: linear-gradient(135deg, #4a148c, #7b1fa2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(106, 27, 154, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .book-details-info {
+        padding-left: 0;
+        margin-top: 2rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        margin-top: 1rem;
+    }
+    
+    .footer-links a {
+        margin: 0 0.75rem;
+    }
+}
+
+/* Animation for page transitions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.main-content {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Book category chips */
+.book-category {
+    display: inline-block;
+    background: linear-gradient(135deg, #f5e9c8, #e8d8a8);
+    color: #6d4c1b;
+    font-weight: 600;
+    padding: 0.25em 0.8em;
+    border-radius: 1em;
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.03em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.book-category:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Login page enhancements */
+.login-page {
+    min-height: 80vh;
+    background:  
+                url('walledited.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem;
+}
+
+.login-page .card {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+}
+

@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ book.title }} - Bookstore{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ book.title }}</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        {% if book.image_url %}
+        <img src="{{ book.image_url }}" class="img-fluid book-details-img rounded" alt="{{ book.title }}">
+        {% else %}
+        <div class="d-flex justify-content-center align-items-center bg-secondary text-white rounded" style="height: 400px;">
+            <i class="fas fa-book fa-8x"></i>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-8">
+        <h1 class="mb-3">{{ book.title }}</h1>
+        <h4 class="text-muted">By {{ book.author }}</h4>
+        
+        <div class="mb-4">
+            <span class="badge bg-secondary text-dark">{{ book.category|capitalize }}</span>
+            {% if book.stock > 5 %}
+            <span class="badge bg-success">In Stock</span>
+            {% elif book.stock > 0 %}
+            <span class="badge bg-warning text-dark">Low Stock ({{ book.stock }} left)</span>
+            {% else %}
+            <span class="badge bg-danger">Out of Stock</span>
+            {% endif %}
+        </div>
+        
+        <h3 class="price mb-4">₹{{ "%.2f"|format(book.price) }}</h3>
+        
+        <div class="mb-4">
+            {% if current_user.is_authenticated and current_user.is_admin() %}
+            <div class="alert alert-info" role="alert">
+                Admin users cannot add books to cart. <a href="{{ url_for('admin_books') }}">Manage books</a> instead.
+            </div>
+            {% elif book.stock > 0 %}
+            <form method="POST" action="{{ url_for('book_detail', book_id=book.id) }}">
+                {{ form.hidden_tag() }}
+                {{ form.book_id }}
+                <div class="row align-items-center mb-3">
+                    <div class="col-auto">
+                        <label for="quantity" class="col-form-label">Quantity:</label>
+                    </div>
+                    <div class="col-auto">
+                        <div class="input-group">
+                            <button type="button" class="btn btn-outline-secondary decrement-btn">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            {{ form.quantity(class="form-control text-center", style="width: 60px;", min=1, max=book.stock) }}
+                            <button type="button" class="btn btn-outline-secondary increment-btn">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-grid gap-2 d-md-block">
+                    {{ form.submit(class="btn btn-primary btn-lg") }}
+                </div>
+            </form>
+            {% else %}
+            <div class="alert alert-danger" role="alert">
+                This book is currently out of stock. Please check back later.
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">Book Details</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th scope="row" style="width: 30%;">ISBN</th>
+                            <td>{{ book.isbn or 'N/A' }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Publisher</th>
+                            <td>{{ book.publisher or 'N/A' }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Publication Date</th>
+                            <td>{{ book.publication_date.strftime('%B %d, %Y') if book.publication_date else 'N/A' }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Category</th>
+                            <td>{{ book.category|capitalize }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Description</h5>
+            </div>
+            <div class="card-body">
+                <p>{{ book.description or 'No description available.' }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if related_books %}
+<div class="row mt-5">
+    <div class="col-md-12">
+        <h3>Related Books</h3>
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            {% for related in related_books %}
+            <div class="col">
+                <div class="card h-100">
+                    {% if related.image_url %}
+                    <img src="{{ related.image_url }}" class="card-img-top" alt="{{ related.title }}">
+                    {% else %}
+                    <div class="card-img-top d-flex justify-content-center align-items-center bg-secondary text-white" style="height: 150px;">
+                        <i class="fas fa-book fa-3x"></i>
+                    </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ related.title }}</h5>
+                        <p class="card-text text-muted">By {{ related.author }}</p>
+                        <p class="card-text price">₹{{ "%.2f"|format(related.price) }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ url_for('book_detail', book_id=related.id) }}" class="btn btn-sm btn-outline-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

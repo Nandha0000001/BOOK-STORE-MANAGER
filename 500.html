@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Server Error - Bookstore{% endblock %}
+
+{% block content %}
+<div class="text-center my-5">
+    <h1 class="display-1 fw-bold">500</h1>
+    <p class="fs-3">Internal Server Error</p>
+    <p class="lead">Something went wrong on our end. We're working to fix it.</p>
+    <a href="{{ url_for('index') }}" class="btn btn-primary">
+        <i class="fas fa-home me-1"></i> Go Home
+    </a>
+</div>
+{% endblock %}

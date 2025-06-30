@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}Shopping Cart - Bookstore{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Your Shopping Cart</h1>
+
+{% if cart.items %}
+<form action="{{ url_for('cart') }}" method="POST">
+    {{ form.csrf_token }}
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Cart Items ({{ cart.total_items }})</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 15%;">Product</th>
+                            <th scope="col" style="width: 40%;">Title</th>
+                            <th scope="col" style="width: 15%;">Price</th>
+                            <th scope="col" style="width: 15%;">Quantity</th>
+                            <th scope="col" style="width: 15%;">Subtotal</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cart.items %}
+                        <tr>
+                            <td>
+                                {% if item.book.image_url %}
+                                <img src="{{ item.book.image_url }}" alt="{{ item.book.title }}" class="cart-item-img">
+                                {% else %}
+                                <div class="d-flex justify-content-center align-items-center bg-secondary text-white rounded" style="width: 60px; height: 80px;">
+                                    <i class="fas fa-book fa-2x"></i>
+                                </div>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ url_for('book_detail', book_id=item.book.id) }}" class="text-decoration-none">
+                                    <h5>{{ item.book.title }}</h5>
+                                    <span class="cart-author">By {{ item.book.author }}</span>
+                                </a>
+                            </td>
+                            <td>₹{{ "%.2f"|format(item.book.price) }}</td>
+                            <td>
+                                <input type="number" name="quantity_{{ item.id }}" value="{{ item.quantity }}" min="0" max="{{ item.book.stock }}" class="form-control cart-quantity" style="width: 80px;">
+                            </td>
+                            <td>₹{{ "%.2f"|format(item.book.price * item.quantity) }}</td>
+                            <td>
+                                <button type="submit" name="remove_item_id" value="{{ item.id }}" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-1"></i> Continue Shopping
+                    </a>
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="mb-3">
+                        <h4>Total: <span class="price">₹{{ "%.2f"|format(cart.total_price) }}</span></h4>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg me-2">
+                        <i class="fas fa-sync-alt me-1"></i> Update Cart
+                    </button>
+                    <a href="{{ url_for('checkout') }}" class="btn btn-success btn-lg">
+                        Proceed to Checkout <i class="fas fa-shopping-cart ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% else %}
+<div class="alert alert-info" role="alert">
+    <h4 class="alert-heading"><i class="fas fa-shopping-cart me-2"></i>Your cart is empty!</h4>
+    <p>You haven't added any books to your cart yet. Browse our collection and add some books!</p>
+    <hr>
+    <a href="{{ url_for('index') }}" class="btn btn-primary">
+        <i class="fas fa-book me-1"></i> Browse Books
+    </a>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard - Bookstore{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Admin Dashboard</h1>
+
+<div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+    <div class="col">
+        <div class="card dashboard-card h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="card-title">Total Books</h5>
+                        <h2 class="card-text">{{ total_books }}</h2>
+                    </div>
+                    <div class="dashboard-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('admin_books') }}" class="btn btn-sm btn-primary">Manage Books</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card dashboard-card h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="card-title">Total Users</h5>
+                        <h2 class="card-text">{{ total_users }}</h2>
+                    </div>
+                    <div class="dashboard-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('admin_users') }}" class="btn btn-sm btn-primary">Manage Users</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card dashboard-card h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="card-title">Total Orders</h5>
+                        <h2 class="card-text">{{ total_orders }}</h2>
+                    </div>
+                    <div class="dashboard-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('admin_orders') }}" class="btn btn-sm btn-primary">Manage Orders</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Recent Orders</h5>
+            </div>
+            <div class="card-body">
+                {% if recent_orders %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in recent_orders %}
+                            <tr>
+                                <td>{{ order.id }}</td>
+                                <td>{{ order.customer.username }}</td>
+                                <td>{{ order.created_at.strftime('%Y-%m-%d') }}</td>
+                                <td>
+                                    <span class="badge
+                                        {% if order.status == 'pending' %}bg-warning text-dark
+                                        {% elif order.status == 'processing' %}bg-info
+                                        {% elif order.status == 'shipped' %}bg-primary
+                                        {% elif order.status == 'delivered' %}bg-success
+                                        {% elif order.status == 'cancelled' %}bg-danger
+                                        {% endif %}">
+                                        {{ order.status|capitalize }}
+                                    </span>
+                                </td>
+                                <td>${{ "%.2f"|format(order.total_amount) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="text-muted">No orders yet.</p>
+                {% endif %}
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('admin_orders') }}" class="btn btn-sm btn-primary">View All Orders</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0">Low Stock Alert</h5>
+            </div>
+            <div class="card-body">
+                {% if low_stock_books %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Book Title</th>
+                                <th>Current Stock</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for book in low_stock_books %}
+                            <tr>
+                                <td>{{ book.title }}</td>
+                                <td>
+                                    {% if book.stock == 0 %}
+                                    <span class="badge bg-danger">Out of Stock</span>
+                                    {% else %}
+                                    <span class="badge bg-warning text-dark">{{ book.stock }} left</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('edit_book', book_id=book.id) }}" class="btn btn-sm btn-outline-primary">Update</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="text-muted">No books with low stock.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="{{ url_for('add_book') }}" class="btn btn-primary">
+                        <i class="fas fa-plus-circle me-1"></i> Add New Book
+                    </a>
+                    <a href="{{ url_for('admin_orders') }}" class="btn btn-success">
+                        <i class="fas fa-tasks me-1"></i> Manage Orders
+                    </a>
+                    <a href="{{ url_for('admin_users') }}" class="btn btn-secondary">
+                        <i class="fas fa-user-cog me-1"></i> Manage Users
+                    </a>
+                    <a href="{{ url_for('index') }}" class="btn btn-info">
+                        <i class="fas fa-home me-1"></i> View Storefront
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

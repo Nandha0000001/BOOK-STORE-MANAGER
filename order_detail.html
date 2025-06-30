@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block title %}Order #{{ order.id }} - Bookstore Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Order #{{ order.id }}</h1>
+    <a href="{{ url_for('admin_orders') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left me-1"></i> Back to Orders
+    </a>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Order Items</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Book</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in order.items %}
+                            <tr>
+                                <td>
+                                    <a href="{{ url_for('book_detail', book_id=item.book.id) }}">
+                                        {{ item.book.title }}
+                                    </a>
+                                </td>
+                                <td>${{ "%.2f"|format(item.price) }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>${{ "%.2f"|format(item.price * item.quantity) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="3" class="text-end">Total:</th>
+                                <th>${{ "%.2f"|format(order.total_amount) }}</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                <h4 class="mb-0">Customer Details</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Customer Information</h5>
+                        <p><strong>Name:</strong> {{ order.customer.username }}</p>
+                        <p><strong>Email:</strong> {{ order.customer.email }}</p>
+                        <p><strong>Account Created:</strong> {{ order.customer.created_at.strftime('%Y-%m-%d') }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Shipping Details</h5>
+                        <p><strong>Address:</strong><br>{{ order.shipping_address }}</p>
+                        <p><strong>Payment Method:</strong> {{ order.payment_method|replace('_', ' ')|title }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">Order Status</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('manage_order', order_id=order.id) }}">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-3">
+                        <p><strong>Current Status:</strong>
+                            <span class="badge
+                                {% if order.status == 'pending' %}bg-warning text-dark
+                                {% elif order.status == 'processing' %}bg-info
+                                {% elif order.status == 'shipped' %}bg-primary
+                                {% elif order.status == 'delivered' %}bg-success
+                                {% elif order.status == 'cancelled' %}bg-danger
+                                {% endif %}">
+                                {{ order.status|capitalize }}
+                            </span>
+                        </p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        {{ form.status.label(class="form-label") }}
+                        {{ form.status(class="form-select") }}
+                    </div>
+                    
+                    <div class="d-grid">
+                        {{ form.submit(class="btn btn-success") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header bg-secondary text-white">
+                <h4 class="mb-0">Order Timeline</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>Order Placed</strong>
+                            <div><small class="text-muted">{{ order.created_at.strftime('%Y-%m-%d %H:%M') }}</small></div>
+                        </div>
+                        <span class="badge bg-success"><i class="fas fa-check"></i></span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>Last Updated</strong>
+                            <div><small class="text-muted">{{ order.updated_at.strftime('%Y-%m-%d %H:%M') }}</small></div>
+                        </div>
+                        <span class="badge bg-info"><i class="fas fa-clock"></i></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
